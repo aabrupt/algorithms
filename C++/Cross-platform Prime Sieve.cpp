@@ -50,7 +50,7 @@ private:
 
 public:
 
-    SieveOfEratosthenes(int MaxNumber = 1000000)
+    SieveOfEratosthenes(const int MaxNumber)
     {
         this->MaxNumber = MaxNumber;
 
@@ -71,7 +71,7 @@ public:
         LOG(std::endl << std::endl << "Execution time: " << this->Speed << " s");
     }
 
-    std::vector<int> GetPrimes()
+    std::vector<int> getPrimes()
     {
         return Primes;
     }
@@ -110,10 +110,3 @@ public:
         return stop;
     }
 };
-
-int main()
-{
-    SieveOfEratosthenes sieve(1000000);
-
-    return 0;
-}
