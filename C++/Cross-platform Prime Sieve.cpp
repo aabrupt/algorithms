@@ -37,22 +37,32 @@ private:
         {
             this->CurrentIndex = i;
 
-            if (Primes[i] > 0) {
-                for (int j = Primes[i] * 2; j < Primes.size(); j += Primes[i])
-                {
-                    Primes[j] = 0;
-                }
+            if (Primes[i] <= 0) continue;
+
+            for (int j = Primes[i] * 2; j < Primes.size(); j += Primes[i])
+            {
+                Primes[j] = 0;
             }
         }
 
         Primes.erase(remove(Primes.begin(), Primes.end(), 0), Primes.end());
     }
 
+    void setMaxNumber(const int MaxNumber)
+    {
+        if (MaxNumber < 0)
+        {
+            this->MaxNumber = MaxNumber * -1;
+            return;
+        }
+        this->MaxNumber = MaxNumber;
+    }
+
 public:
 
     SieveOfEratosthenes(const int MaxNumber)
     {
-        this->MaxNumber = MaxNumber;
+        this->setMaxNumber(MaxNumber);
 
         this->start = std::chrono::high_resolution_clock::now();
 
