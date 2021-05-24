@@ -2,7 +2,6 @@
 # include <ctime>
 # include <vector>
 # include <chrono>
-# include <thread>
 # include <future>
 
 # define Debug 1
@@ -26,9 +25,9 @@ private:
 
     void Sieve()
     {
-        for (int i = 0; i < MaxNumber; i++)
+        for (int i = 0; i < this->MaxNumber; i++)
         {
-            Primes.push_back(i);
+            Primes.emplace_back(i);
         }
 
         Primes[1] = 0;
@@ -46,12 +45,11 @@ private:
         }
 
         Primes.erase(remove(Primes.begin(), Primes.end(), 0), Primes.end());
+
     }
 
-    void setMaxNumber(const int MaxNumber)
-    {
-        if (MaxNumber < 0)
-        {
+    void setMaxNumber(const int MaxNumber) {
+        if (MaxNumber < 0) {
             this->MaxNumber = MaxNumber * -1;
             return;
         }
@@ -62,7 +60,9 @@ public:
 
     SieveOfEratosthenes(const int MaxNumber)
     {
-        this->setMaxNumber(MaxNumber);
+        setMaxNumber(MaxNumber);
+
+        this->Primes.reserve(MaxNumber);
 
         this->start = std::chrono::high_resolution_clock::now();
 
